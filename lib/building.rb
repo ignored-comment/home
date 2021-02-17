@@ -26,4 +26,26 @@ class Building
     end
     results = sum / @units.count
   end
+
+  def rented_units
+    sorted = []
+    @units.each do |unit|
+      if unit.renter != nil
+        sorted << unit
+      end
+    end
+    sorted
+  end
+
+  def renter_with_highest_rent
+    rented = []
+    @units.each {|unit| rented << unit if unit.renter != nil}
+    result = rented[0]
+    rented.each do |unit|
+      if unit.monthly_rent > result.monthly_rent
+        result = unit
+      end
+    end
+    result.renter
+  end
 end
